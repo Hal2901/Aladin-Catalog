@@ -189,7 +189,8 @@
     padding: 0.75rem;
     width: 33%;
     flex-shrink: 0;
-    animation: moving 30s ease-in-out infinite;
+    transition: transform 1s ease-in-out;
+    /* animation: moving 30s ease-in-out infinite; */
 }
 
 .partner-logo img {
@@ -204,7 +205,7 @@
     width: 75%;
 }
 
-@keyframes moving {
+/* @keyframes moving {
     0% {
         transform: translateX(0);
     }
@@ -262,4 +263,4 @@
     100% {
         transform: translateX(0%);
     }
-}
+} */

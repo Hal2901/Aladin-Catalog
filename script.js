@@ -1,23 +1,21 @@
+//animate menu
 const hamburgerMenu = document.querySelector(".hamburgerMenu");
 hamburgerMenu.addEventListener("click", () => {
     const hamburgerLine = document.querySelectorAll(".hamburgerMenu span");
     hamburgerLine.forEach((line) => {
         line.classList.toggle("active");
     });
-
     const sidebar = document.querySelector(".sidebar");
     sidebar.classList.toggle("active");
-
     const main = document.querySelectorAll("section, footer");
     main.forEach(section => {
         section.classList.toggle("active");
     });
 });
-
+//check page for menu
 function checkPage() {
     const sidebarMenu = document.querySelectorAll("li.sidebarMenu");
     const footerMenu = document.querySelectorAll("li.footerMenu");
-
     const pathArray = document.location.href.split("/");
     const location = pathArray[pathArray.length-1];
     switch (location) {
@@ -38,16 +36,12 @@ function checkPage() {
             footerMenu[3].classList.toggle("active");
             break;
     }
-    
 }
-window.onload = checkPage;
+checkPage();
 //technology logo touch slider
 const sliders = document.querySelectorAll(".slider");
 sliders.forEach(slider => {
     const slides = Array.from(slider.querySelectorAll("div"));
-
-    console.log(slider.getBoundingClientRect().width);
-    console.log(window.innerWidth);
 
     let isDragging = false;
     let startPos = 0;
@@ -119,3 +113,224 @@ sliders.forEach(slider => {
         slider.style.transform = `translateX(${currentTranslate}px)`;
     }
 });
+//partner-logo auto play
+function autoPartnerLogo() {
+    const slides = document.querySelectorAll(".partner-logo");
+    const interval = 5000;
+    let i = 0;
+    let slideInterval = setInterval(nextLogo, interval);
+    function nextLogo() {
+        if (i < slides.length - 3) {
+            i++;
+        }
+        else {
+            i = 0;
+        }
+        slides.forEach((slide) => {
+            slide.style.transform =  `translate(-${i*100}%)`;
+        });
+    }
+}
+autoPartnerLogo();
+//product slide
+const slideShows = document.querySelectorAll(".slideShow");
+slideShows.forEach((slideShow) => {
+    const interval = 5000;
+    let i = 0;
+    let slideInterval = setInterval(next, interval);
+    const slides = slideShow.querySelectorAll(".slide");
+    const navigation = slideShow.querySelectorAll("button.navigation");
+    const leftBtn = slideShow.querySelector(".leftArrow");
+    const rightBtn = slideShow.querySelector(".rightArrow");
+    function next() {
+        navigation.forEach(btn => {
+            btn.classList.remove("show");
+        });
+        if (i < slides.length - 1) {
+            i++;
+        }
+        else {
+            i = 0;
+        }
+        slides.forEach((slide) => {
+            slide.style.transform =  `translate(-${i*100}%)`;
+        });
+        navigation[i].classList.add("show");
+    }
+    function prev() {
+        navigation.forEach(btn => {
+            btn.classList.remove("show");
+        });
+        if (i > 0) {
+            i--;
+        }
+        else {
+            i = slides.length - 1;
+        }
+        slides.forEach((slide) => {
+            slide.style.transform =  `translate(-${i*100}%)`;
+        });
+        navigation[i].classList.add("show");
+    }
+    leftBtn.addEventListener("click", () => {
+        prev();
+        clearInterval(slideInterval);
+        slideInterval = setInterval(next, interval);
+    });
+    rightBtn.addEventListener("click", () => {
+        next();
+        clearInterval(slideInterval);
+        slideInterval = setInterval(next, interval);
+    });
+    navigation.forEach((btn, index) => {
+        navigation[index].addEventListener("click", () => {
+            navigation.forEach((btn) => {
+                btn.classList.remove("show");
+            });
+            slides.forEach((slide) => {
+                i = index;
+                slide.style.transform =  `translate(-${index*100}%)`;
+            });
+            navigation[index].classList.add("show");
+            clearInterval(slideInterval);
+            slideInterval = setInterval(next, interval);
+        });
+    });
+    const images = slideShow.querySelectorAll("a");
+    images.forEach((image) => {
+        image.addEventListener("mouseover", () => {
+            clearInterval(slideInterval);
+        });
+
+        image.addEventListener("mouseout", () => {
+            slideInterval = setInterval(next, interval);
+        });
+    });
+});
+// form validation
+function formValidation() {
+    const formInputs = document.querySelectorAll(".form-input");
+    const form = document.querySelector("form");
+    // regular expression
+    const nameRegExp = /[\w]{2,}/;
+    const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+    const emailRegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    // //check if the input is valid according to pattern
+    function isValid(input, regExp) {
+        return (regExp.test(input.value)) ? true : false;
+    }
+    // if form not meet requirement do not send
+    form.addEventListener("submit", (e) => {
+        formInputs.forEach(formInput => {
+            const input = formInput.querySelector("input");
+            const error = formInput.querySelector("span.error");
+
+            if (input.value.length === 0 || input.value == null) {
+                switch (input.id) {
+                    case "fb-link": 
+                    case "job":
+                    case "organization":
+                    case "message":
+                    case "receive-mail":
+                        return;
+
+                    case "full-name":
+                        input.className = "invalid";
+                        error.textContent = "Your name is required";
+                        break;
+
+                    case "email":
+                        input.className = "invalid";
+                        error.textContent = "Your email is required";
+                        break;
+                        
+                    case "phone":
+                        input.className = "invalid";
+                        error.textContent = "Your phone number is required";
+                        break;
+                }
+                e.preventDefault();
+            }
+
+            if (input.className === "invalid") {
+                e.preventDefault();
+            }  
+        });
+    });
+    // check validation
+    formInputs.forEach(formInput => {
+        const input = formInput.querySelector("input");
+        const error = formInput.querySelector("span.error");
+        input.addEventListener("focus", () => {
+            switch (input.id) {
+                case "fb-link": 
+                case "job":
+                case "organization":
+                case "message":
+                case "receive-mail":
+                    return;
+            }
+            input.className = "";
+            error.textContent = "";
+        });
+        input.addEventListener("input", () => {
+            switch (input.id) {
+                case "full-name":
+                case "user-email":
+                case "phone":
+                    if (input.value.length === 0) {
+                        input.className = "";
+                        error.textContent = "";
+                    }
+                    break;
+            }
+        });
+        input.addEventListener("blur", () => {
+            switch (input.id) {
+                case "full-name":
+                    if (isValid(input, nameRegExp)) {
+                        input.className = "valid";
+                        error.textContent = "";
+                    }
+                    else {
+                        input.className = "invalid";
+                        error.textContent = "Name is at least 2 characters";
+                    }
+                    if (input.value.length === 0) {
+                        input.className = "";
+                        error.textContent = "";
+                    }
+                    break;
+                case "email":
+                    if (isValid(input, emailRegExp)) {
+                        input.className = "valid";
+                        error.textContent = "";
+                    }
+                    else {
+                        input.className = "invalid";
+                        error.textContent = "Invalid Email";
+                    }
+                    if (input.value.length === 0) {
+                        input.className = "";
+                        error.textContent = "";
+                    }
+                    break;
+                case "phone":
+                    if (isValid(input, phoneRegExp)) {
+                        input.className = "valid";
+                        error.textContent = "";
+                    }
+                    else {
+                        input.className = "invalid";
+                        error.textContent = "Invalid Phone Number";
+                    }
+                    if (input.value.length === 0) {
+                        input.className = "";
+                        error.textContent = "";
+                    }
+                    break;
+            }
+        });  
+    });
+}
+formValidation();
