@@ -5,7 +5,7 @@
     --mid-color: #E4EFE7;
     --light-color:#FAF1E6;
     --lightest-color: #FDFAF6;
-    --footer-color: #064420;
+    --footer-color: #00180a;
     --bright-color: #00c200;
     --gradient-color: linear-gradient(120deg, #FDFAF6, #A0C334);
 }
@@ -14,7 +14,8 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    border: 1px solid red;
+    transition: all 0.1s ease-in-out;
+    /* border: 1px solid red; */
 }
 
 html {
@@ -23,13 +24,13 @@ html {
 
 body {
     min-height: 100%;
-    font-family: 'Rajdhani', 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column; 
     justify-content: space-between;
     background-color: var(--mid-color);
     position: relative;
-    gap: 1rem;
+    /* gap: 1rem; */
 }
 
 a {
@@ -51,8 +52,8 @@ section:nth-child(odd),
 section:nth-child(odd) h2,
 section:nth-child(odd) h3 {
     background-color: var(--dark-color);
-    color: var(--lightest-color);
-    border-bottom: 3px solid var(--lightest-color);
+    color: var(--mid-color);
+    border-bottom: 3px solid var(--mid-color);
 }
 
 section.active,
@@ -66,7 +67,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     background-color: var(--dark-color);
-    padding: 0.5rem 1.5rem;
+    padding: 1rem 1.5rem;
 }
 
 .logoCompany {
@@ -75,7 +76,7 @@ nav {
 }
 
 .logoCompany img {
-    width: 2.5rem;
+    width: 3rem;
     background-color: var(--lightest-color);
     padding: 0.25rem;
     border-radius: 0.5rem;
@@ -111,11 +112,11 @@ nav {
 }
 
 .hamburger-line1 {
-    transform: translateY(-0.25em);
+    transform: translateY(-0.5em);
 }
 
 .hamburger-line3 {  
-    transform: translateY(0.25em);
+    transform: translateY(0.5em);
 }
 
 .hamburger-line1.active {
@@ -208,6 +209,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-top: 1rem;
     padding: 1.5rem;
 }
 
@@ -243,9 +245,13 @@ li.footerMenu a:hover {
     border-bottom: 2px solid var(--lightest-color);
 }
 
+li.socialMedia a {
+    font-size: 24px;
+}
+
 footer li.socialMedia a {
     color: var(--lightest-color);
-    font-size: 1.5rem;
+    font-size: 24px;
 }
 
 li.socialMedia a:hover {
