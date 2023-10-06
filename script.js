@@ -39,77 +39,77 @@ function checkPage() {
 }
 checkPage();
 //technology logo touch slider
-const sliders = document.querySelectorAll(".slider");
-sliders.forEach(slider => {
-    const slides = Array.from(slider.querySelectorAll("div"));
+// const sliders = document.querySelectorAll(".slider");
+// sliders.forEach(slider => {
+//     const slides = Array.from(slider.querySelectorAll("div"));
 
-    let isDragging = false;
-    let startPos = 0;
-    let currentTranslate = 0;
-    let prevTranslate = 0;
-    let animationID;
-    let currentIndex = 0;
+//     let isDragging = false;
+//     let startPos = 0;
+//     let currentTranslate = 0;
+//     let prevTranslate = 0;
+//     let animationID;
+//     let currentIndex = 0;
 
-    slides.forEach((slide, index) => {
-        const slideImage = slide.querySelector("img");
-        // disable default image drag
-        slideImage.addEventListener("dragstart", (e) => e.preventDefault());
-        // pointer events
-        slide.addEventListener("pointerdown", pointerDown(index));
-        slide.addEventListener("pointerup", pointerUp);
-        slide.addEventListener("pointerleave", pointerUp);
-        slide.addEventListener("pointermove", pointerMove);
-    });
-    // make responsive to changes
-    slider.addEventListener("resize", setPositionByIndex);
+//     slides.forEach((slide, index) => {
+//         const slideImage = slide.querySelector("img");
+//         // disable default image drag
+//         slideImage.addEventListener("dragstart", (e) => e.preventDefault());
+//         // pointer events
+//         slide.addEventListener("pointerdown", pointerDown(index));
+//         slide.addEventListener("pointerup", pointerUp);
+//         slide.addEventListener("pointerleave", pointerUp);
+//         slide.addEventListener("pointermove", pointerMove);
+//     });
+//     // make responsive to changes
+//     slider.addEventListener("resize", setPositionByIndex);
 
-    window.oncontextmenu = function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
-    }
-    function pointerDown(index) {
-        return function (e) {
-            currentIndex = index;
-            startPos = e.clientX;
-            isDragging = true;
-            animationID = requestAnimationFrame(animation);
-            slider.classList.add('grabbing');
-        }
-    }
-    function pointerMove(e) {
-        if (isDragging) {
-            const currentPos = e.clientX;
-            currentTranslate = prevTranslate + currentPos - startPos;
-        }
-    }
-    function pointerUp() {
-        cancelAnimationFrame(animationID);
-        isDragging = false;
-        const movedBy = currentTranslate - prevTranslate;
+//     window.oncontextmenu = function (event) {
+//         event.preventDefault();
+//         event.stopPropagation();
+//         return false;
+//     }
+//     function pointerDown(index) {
+//         return function (e) {
+//             currentIndex = index;
+//             startPos = e.clientX;
+//             isDragging = true;
+//             animationID = requestAnimationFrame(animation);
+//             slider.classList.add('grabbing');
+//         }
+//     }
+//     function pointerMove(e) {
+//         if (isDragging) {
+//             const currentPos = e.clientX;
+//             currentTranslate = prevTranslate + currentPos - startPos;
+//         }
+//     }
+//     function pointerUp() {
+//         cancelAnimationFrame(animationID);
+//         isDragging = false;
+//         const movedBy = currentTranslate - prevTranslate;
         
-        // if moved enough negative then snap to next slide if there is one
-        if (movedBy < -100 && currentIndex < slides.length - 1) currentIndex++;
+//         // if moved enough negative then snap to next slide if there is one
+//         if (movedBy < -100 && currentIndex < slides.length - 1) currentIndex++;
     
-        // if moved enough positive then snap to previous slide if there is one
-        if (movedBy > 100 && currentIndex > 0) currentIndex--;
-        setPositionByIndex();
+//         // if moved enough positive then snap to previous slide if there is one
+//         if (movedBy > 100 && currentIndex > 0) currentIndex--;
+//         setPositionByIndex();
     
-        slider.classList.remove('grabbing');
-    }
-    function animation() {
-        setSliderPosition();
-        if (isDragging) requestAnimationFrame(animation);
-    }
-    function setPositionByIndex() {
-        currentTranslate = currentIndex * -slider.getBoundingClientRect().width;
-        prevTranslate = currentTranslate;
-        setSliderPosition();
-    }
-    function setSliderPosition() {
-        slider.style.transform = `translateX(${currentTranslate}px)`;
-    }
-});
+//         slider.classList.remove('grabbing');
+//     }
+//     function animation() {
+//         setSliderPosition();
+//         if (isDragging) requestAnimationFrame(animation);
+//     }
+//     function setPositionByIndex() {
+//         currentTranslate = currentIndex * -slider.getBoundingClientRect().width;
+//         prevTranslate = currentTranslate;
+//         setSliderPosition();
+//     }
+//     function setSliderPosition() {
+//         slider.style.transform = `translateX(${currentTranslate}px)`;
+//     }
+// });
 // fallback for touch slider
 // const containers = document.querySelectorAll(".container");
 // containers.forEach(container => {

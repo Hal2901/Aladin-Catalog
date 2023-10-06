@@ -134,3 +134,7 @@ tfoot {
     line-height: 2rem;
     color: var(--dark-color);
 }
+
+.extracurricular li {
+    list-style: circle;
+}

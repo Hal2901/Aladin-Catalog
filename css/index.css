@@ -5,21 +5,20 @@
     --lightest-color: #FDFAF6;
     --footer-color: #00180a;
     --bright-color: #00c200;
-    --gradient-color: linear-gradient(120deg, #FDFAF6, #A0C334);
 }
 
 h2 {
-    font-size: 1.75rem;
-    margin: 1rem 0;
+    font-size: clamp(1.75rem, 1.75rem + 10vw, 2.5rem);
+    margin: 1.5rem 0;
 }
 
 /* heroes */
 .heroes {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: clamp(0.5rem, 0.5rem + 10vw, 1.5rem);
 }
 
 #cardDesign {
@@ -57,7 +56,7 @@ h2 {
 } */
 
 #cardDesign > #designContainer > img {
-    width: 3.5rem;
+    width: clamp(3.5rem, 3.5rem + 10vw, 4.5rem);
     position: absolute;
     top: 1.5rem;
     left: 1.5rem;
@@ -107,16 +106,17 @@ h2 {
 
 .heroes p {
     padding: 1.75rem 0.5rem 0 0rem;
-    font-size: 1.21rem;
+    font-size: clamp(1.21rem, 1.21rem + 10vw, 1.75rem);
     font-weight: 500;
     text-align: justify;
     color: var(--dark-color);
+    line-height: 1.5;
 }
 
 .heroes p > span > a {
     color:var(--dark-color);
     font-weight: 900;
-    font-size: 1.75rem;
+    font-size: clamp(1.75rem, 1.75 + 10vw, 2.5rem);
 }
 
 .heroes p > span > a:hover {
@@ -124,36 +124,38 @@ h2 {
 }
 /* core-values green*/
 .core-values {
-    padding: 1.5rem;
+    padding: 0 1.5rem 3rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: clamp(1.5rem, 1.5rem + 10vw, 3rem);
 }
 
 .core-values div {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: clamp(0.25rem, 0.25rem + 10vw, 1rem);
 }
 
 .core-values div h3 {
     border: none;
     display: flex;
-    align-items: end;
-    gap: 0.5rem;
+    align-items: center;
+    gap: clamp(0.5rem, 0.5rem + 10vw, 1rem);
+    font-size: clamp(1rem, 1rem + 10vw, 1.75rem);
 }
 
 .core-values div h3 span{
-    font-size: 1.75rem;
+    font-size: clamp(1.75rem, 1.75rem + 10vw, 3rem);
 }
 
 .core-values div p {
-    font-size: 1.1rem;
+    font-size: clamp(1.1rem, 1.1rem + 10vw, 1.5rem);
     text-align: justify;
     padding: 0.75rem;
     border: 3px solid var(--lightest-color);
     border-radius: 1rem;
+    line-height: 1.5;
 }
 
 .material-symbols-outlined {
@@ -165,10 +167,14 @@ h2 {
 }
 /* roadmap white*/
 .roadmap {
-    padding: 1.5rem;
+    padding: 5rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.roadmap h2 {
+    margin-bottom: 4rem;
 }
 
 .roadmap > div {
@@ -191,14 +197,14 @@ h2 {
     font-size: 1.4rem;
     font-weight: 600;
     padding: 0.25rem;
-    margin-left: -9rem;
-    margin-right: 1.25rem;
+    margin-left: -11rem;
+    margin-right: 3rem;
 }
 
 .circle:nth-child(even) div {
     text-align: end;
-    margin-right: -9rem;
-    margin-left: 1.25rem;
+    margin-right: -11rem;
+    margin-left: 3rem;
 }
 
 .circle .date {
@@ -207,14 +213,9 @@ h2 {
     padding: 0.25rem;
 }
 
-
-.roadmap img {
-    width: 100%;
-}
-
 .roadmap .line {
-    width: 0.5rem;
-    height: 50rem;
+    width: clamp(0.5rem, 0.5rem + 10vw, 1rem);
+    height: clamp(50rem, 50rem + 10vw, 70rem);
     background-color: var(--dark-color);
     border-radius: 1rem;
     margin: 0 auto;
@@ -222,34 +223,14 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10rem;
+    gap: clamp(10rem, 10rem + 10vw, 12rem);
 }
 
 .roadmap .circle {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: clamp(1.5rem, 1.5rem + 5vw, 2.5rem);
+    height: clamp(1.5rem, 1.5rem + 5vw, 2.5rem);
     border-radius: 50%;
     background-color: var(--dark-color);
-}
-
-#start-up {
-    top: 2rem;
-    left: 0;
-}
-
-#breakrhough{
-    top: 11rem;
-    right: 0;
-}
-
-#positioning{
-    top: 20rem;
-    left:  0;
-}
-
-#number-employee{
-    top: 28rem;
-    right: 0;
 }
 
 /* technology green*/
@@ -263,20 +244,21 @@ h2 {
 .technology > h2,
 .technology div h3 {
     text-align: center;
-    margin: 0.5rem auto;
+    margin: 1rem auto;
 }
 
 .container {
     display: flex;
     align-items: center;
     overflow: hidden;
-    margin: 0 1rem;
+    padding: 0 1.5rem;
 }
 
 .slider {
-    display: inline-flex;
-    width: fit-content;
-    transform: translateX(0);
+    display: flex;
+    /* width: fit-content; */
+    flex-wrap: wrap;
+    /* transform: translateX(0); */
     transition: transform 0.3s ease-out;
 }
 
@@ -291,13 +273,19 @@ h2 {
 .language,
 .front-end,
 .back-end {
-    width: 100%;
+    width: 50%;
     height: auto;
-    flex-shrink: 0;
-    padding: 1rem 0 2rem 0;
+    /* flex-shrink: 0; */
+    padding: 2.5rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#language h3,
+#front-end h3,
+#back-end h3 {
+    font-size: 1.75rem;
 }
 
 #front-end,
@@ -315,7 +303,7 @@ h2 {
 .back-end img {
     width: 50%;
     height: 100%;
-    padding: 1rem;
+    padding: 0.5rem;
     background-color: var(--lightest-color);
     box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.363);
     border-radius: 1rem;
@@ -324,6 +312,7 @@ h2 {
 
 .arrowLeft,
 .arrowRight {
+    display: none;
     font-size: 2rem; 
 }
 
@@ -333,8 +322,8 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0 0.5rem;
+    gap: 1rem;
+    padding: 2rem 0.5rem;
 }
 
 .partner-slide {
