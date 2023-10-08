@@ -13,7 +13,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    /* transition: all 0.1s ease-in-out; */
     /* border: 1px solid red; */
 }
 
@@ -71,7 +70,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     background-color: var(--dark-color);
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
 }
 
 .logoCompany {
@@ -80,7 +79,7 @@ nav {
 }
 
 .logoCompany img {
-    width: clamp(3rem, 3rem + 10vw, 5rem);
+    width: 3rem;
     background-color: var(--lightest-color);
     padding: 0.25rem;
     border-radius: 0.5rem;
@@ -89,12 +88,12 @@ nav {
 .logoCompany p {
     color: var(--lightest-color);
     margin: 0 0.5rem;
-    font-size: clamp(1rem, 1rem + 5vw, 1.5rem);
+    font-size: 1.25rem;
 }
 /* hamburger Menu */
 .hamburgerMenu {
-    width: 4rem;
-    height: 3.5rem;
+    width: 3rem;
+    height: 3rem;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -107,28 +106,34 @@ nav {
     border: 1px solid var(--lightest-color);
 }
 
+.hamburgerMenu.active {
+    background-color: var(--lightest-color);
+}
+
 .hamburgerMenu span {
     display: block;
-    width: clamp(2rem, 2rem + 5vw, 3rem);
+    width: 2rem;
     height: 0.25rem;
     background-color: var(--lightest-color);
     transition: all 0.1s ease-in-out;
 }
 
 .hamburger-line1 {
-    transform: translateY(-1rem);
+    transform: translateY(-0.5rem);
 }
 
 .hamburger-line3 {  
-    transform: translateY(1rem);
+    transform: translateY(0.5rem);
 }
 
 .hamburger-line1.active {
     transform: rotate(45deg) translateY(3px) translate(3px);
+    background-color: var(--dark-color);
 }
 
 .hamburger-line3.active {
     transform: rotate(-45deg) translateY(-3px) translate(3px);
+    background-color: var(--dark-color);
 }
 
 .hamburger-line2.active {
@@ -140,45 +145,32 @@ div.navMenu {
 }
 /* sidebar */
 .sidebar {
-    display: none;
-    bottom: 50rem;
-    left: 0;
-    height: 50rem;
+    display: flex;
+    height: 0;
     width: 100%;
     background-color: var(--lightest-color);
-    
     flex-direction: column;
     align-items: start;
     gap: 2rem;
-    padding: 2rem 1rem 1rem 2rem;
     transition: all 0.5s ease-in-out;
     z-index: 100;
     border-bottom-right-radius: 25%;
+    overflow-y: hidden;
 }
 
 .sidebar.active {
-    display: flex;
+    height: 30rem;
 }
 
-.sidebar img {
-    width: clamp(3.5rem, 3.5rem + 5vw, 5rem);
-    background-color: var(--lightest-color);
-    padding: 0.25rem;
-    border: 2px solid var(--dark-color);
-    border-radius: 0.5rem;
-}
-
-.sidebar span {
-    width: 75%;
-    height: 0.5rem;
-    border-radius: 1rem;
-    background-color: var(--dark-color);
+.sidebarMenu {
+    margin-top: 1rem;
+    margin-left: 1rem;
 }
 
 .sidebar > .sidebarMenu > ul {
     display: flex;
     flex-direction: column;
-    gap: clamp(1.25rem, 1.25rem + 10vw, 2rem);
+    gap: 1.5rem;
 }
 
 li.sidebarMenu.active > a {
@@ -195,29 +187,34 @@ li.sidebarMenu a:hover {
 
 .sidebar a {
     color: var(--dark-color);
-    font-size: clamp(2rem, 1rem + 5vw, 2.5rem);
-    padding: 0 0.25rem;
+    font-size: 2rem;
+    padding: 0 0.5rem;
 }
 
 .socialMedia ul {
     display: flex;
     gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
 .sidebar .socialMedia {
     margin-top: auto;
     margin-bottom: 1rem;
-    margin-left: 0.5rem;
+    margin-left: 1.5rem;
+}
+
+.sidebar .socialMedia ul {
+    gap: 0.5rem;
 }
 /* footer */
 footer {
     background-color: var(--footer-color);
     color: var(--lightest-color);
-    font-size: 1.5rem;
+    font-size: 1rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
     padding: 2rem 2rem;
 }
 
@@ -230,7 +227,7 @@ footer {
 footer .logoCompany a {
     color: var(--light-color);
     margin-left: 1rem;
-    font-size: clamp(2rem, 2rem + 1vw, 3rem);
+    font-size: 2rem;
 }
 
 footer .logoCompany a:hover {
@@ -266,7 +263,7 @@ li.socialMedia a {
 
 footer li.socialMedia a {
     color: var(--lightest-color);
-    font-size: clamp(24px, 24px + 1vw, 40px);
+    font-size: 32px;
 }
 
 li.socialMedia a:hover {
@@ -289,16 +286,17 @@ li.socialMedia a {
 
     div.navMenu {
         display: flex;
+        margin-right: 2rem;
     }
 
     .navMenu ul {
         display: flex;
         flex-direction: row;
-        gap: 2rem;
+        gap: 2.5rem;
     }
 
     li.navMenu {
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
 
     li.navMenu a {

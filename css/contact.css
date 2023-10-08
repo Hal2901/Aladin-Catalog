@@ -47,13 +47,11 @@ legend h2 {
 }
 
 .contact {
-    clip-path: polygon(0 4%, 95% 0, 100% 0, 100% 97%, 5% 100%, 0 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 4rem 1.5rem;
     gap: 3rem;
-    border-radius: 1rem;
 }
 
 ul.info {
@@ -112,7 +110,7 @@ legend h2 {
 }
 
 .form-input input {
-    line-height: 1.25rem;
+    line-height: 2rem;
 }
 
 .form-input input.invalid {

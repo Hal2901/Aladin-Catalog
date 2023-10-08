@@ -2,6 +2,7 @@
 function animateMenu() {
     const hamburgerMenu = document.querySelector(".hamburgerMenu");
     hamburgerMenu.addEventListener("click", () => {
+        hamburgerMenu.classList.toggle("active");
         const hamburgerLine = document.querySelectorAll(".hamburgerMenu span");
         hamburgerLine.forEach((line) => {
             line.classList.toggle("active");
@@ -14,6 +15,7 @@ function animateMenu() {
         });
         window.addEventListener("resize", () => {
             if (window.innerWidth >= 720) {
+                hamburgerMenu.classList.remove("active");
                 hamburgerLine.forEach((line) => {
                     line.classList.remove("active");
                 });
@@ -165,7 +167,7 @@ checkPage();
 //partner-logo auto play
 function autoPartnerLogo() {
     const slides = document.querySelectorAll(".partner-logo.smallScreen");
-    const interval = 2000;
+    const interval = 5000;
     let i = 0;
     let slideInterval = setInterval(nextLogo, interval);
     function nextLogo() {
@@ -249,8 +251,21 @@ function productSlide() {
                 slideInterval = setInterval(next, interval);
             });
         });
+        const overlays = slideShow.querySelectorAll(".overlay");
+        overlays.forEach(overlay => {
+            overlay.addEventListener("click", () => {
+                overlay.style.display = "none";
+            });
+        });
+        window.addEventListener("resize", () => {
+            if (window.innerWidth < 720) {
+                overlays.forEach(overlay => {
+                        overlay.style.display = "none";
+                });
+            }
+        });
         const images = slideShow.querySelectorAll("img");
-        images.forEach((image) => {
+        images.forEach((image, index) => {
             image.addEventListener("pointerover", () => {
                 clearInterval(slideInterval);
             });
@@ -258,7 +273,16 @@ function productSlide() {
             image.addEventListener("pointerout", () => {
                 slideInterval = setInterval(next, interval);
             });
+
+            image.addEventListener("click", () => {
+                if (window.innerWidth >= 720) {
+                    overlays[index].style.display = "block";
+                }
+            }); 
         });
+
+
+
     });
 }
 productSlide();
