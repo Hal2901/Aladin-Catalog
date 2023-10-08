@@ -1,39 +1,58 @@
 //animate menu
-const hamburgerMenu = document.querySelector(".hamburgerMenu");
-hamburgerMenu.addEventListener("click", () => {
-    const hamburgerLine = document.querySelectorAll(".hamburgerMenu span");
-    hamburgerLine.forEach((line) => {
-        line.classList.toggle("active");
+function animateMenu() {
+    const hamburgerMenu = document.querySelector(".hamburgerMenu");
+    hamburgerMenu.addEventListener("click", () => {
+        const hamburgerLine = document.querySelectorAll(".hamburgerMenu span");
+        hamburgerLine.forEach((line) => {
+            line.classList.toggle("active");
+        });
+        const sidebar = document.querySelector(".sidebar");
+        sidebar.classList.toggle("active");
+        const main = document.querySelectorAll("section, footer");
+        main.forEach(section => {
+            section.classList.toggle("active");
+        });
+        window.addEventListener("resize", () => {
+            if (window.innerWidth >= 720) {
+                hamburgerLine.forEach((line) => {
+                    line.classList.remove("active");
+                });
+                sidebar.classList.remove("active");
+                main.forEach(section => {
+                    section.classList.remove("active");
+                });
+            }
+        }); 
     });
-    const sidebar = document.querySelector(".sidebar");
-    sidebar.classList.toggle("active");
-    const main = document.querySelectorAll("section, footer");
-    main.forEach(section => {
-        section.classList.toggle("active");
-    });
-});
+}
+animateMenu();
 //check page for menu
 function checkPage() {
     const sidebarMenu = document.querySelectorAll("li.sidebarMenu");
     const footerMenu = document.querySelectorAll("li.footerMenu");
+    const navMenu = document.querySelectorAll("li.navMenu");
     const pathArray = document.location.href.split("/");
     const location = pathArray[pathArray.length-1];
     switch (location) {
         case "index.html":
             sidebarMenu[0].classList.toggle("active");
             footerMenu[0].classList.toggle("active");
+            navMenu[0].classList.toggle("active");
             break;
         case "products.html":
             sidebarMenu[1].classList.toggle("active");
             footerMenu[1].classList.toggle("active");
+            navMenu[1].classList.toggle("active");
             break;
         case "organization.html":
             sidebarMenu[2].classList.toggle("active");
             footerMenu[2].classList.toggle("active");
+            navMenu[2].classList.toggle("active");
             break;
         case "contact.html":
             sidebarMenu[3].classList.toggle("active");
             footerMenu[3].classList.toggle("active");
+            navMenu[3].classList.toggle("active");
             break;
     }
 }
@@ -142,10 +161,11 @@ checkPage();
 //         });
 //     });
 // });
+
 //partner-logo auto play
 function autoPartnerLogo() {
-    const slides = document.querySelectorAll(".partner-logo");
-    const interval = 5000;
+    const slides = document.querySelectorAll(".partner-logo.smallScreen");
+    const interval = 2000;
     let i = 0;
     let slideInterval = setInterval(nextLogo, interval);
     function nextLogo() {
@@ -162,80 +182,86 @@ function autoPartnerLogo() {
 }
 autoPartnerLogo();
 //product slide
-const slideShows = document.querySelectorAll(".slideShow");
-slideShows.forEach((slideShow) => {
-    const interval = 5000;
-    let i = 0;
-    let slideInterval = setInterval(next, interval);
-    const slides = slideShow.querySelectorAll(".slide");
-    const navigation = slideShow.querySelectorAll("button.navigation");
-    const leftBtn = slideShow.querySelector(".leftArrow");
-    const rightBtn = slideShow.querySelector(".rightArrow");
-    function next() {
-        navigation.forEach(btn => {
-            btn.classList.remove("show");
-        });
-        if (i < slides.length - 1) {
-            i++;
-        }
-        else {
-            i = 0;
-        }
-        slides.forEach((slide) => {
-            slide.style.transform =  `translate(-${i*100}%)`;
-        });
-        navigation[i].classList.add("show");
-    }
-    function prev() {
-        navigation.forEach(btn => {
-            btn.classList.remove("show");
-        });
-        if (i > 0) {
-            i--;
-        }
-        else {
-            i = slides.length - 1;
-        }
-        slides.forEach((slide) => {
-            slide.style.transform =  `translate(-${i*100}%)`;
-        });
-        navigation[i].classList.add("show");
-    }
-    leftBtn.addEventListener("click", () => {
-        prev();
-        clearInterval(slideInterval);
-        slideInterval = setInterval(next, interval);
-    });
-    rightBtn.addEventListener("click", () => {
-        next();
-        clearInterval(slideInterval);
-        slideInterval = setInterval(next, interval);
-    });
-    navigation.forEach((btn, index) => {
-        navigation[index].addEventListener("click", () => {
-            navigation.forEach((btn) => {
+function productSlide() {
+    const slideShows = document.querySelectorAll(".slideShow");
+    const products = document.querySelectorAll(".product");
+    slideShows.forEach((slideShow, index) => {
+        const interval = 5000;
+        let i = 0;
+        let slideInterval = setInterval(next, interval);
+        const slides = slideShow.querySelectorAll(".slide");
+        const navigation = slideShow.querySelectorAll("button.navigation");
+        // const leftBtn = Array.from(document.querySelectorAll(".leftArrow"));
+        // const rightBtn = Array.from(document.querySelectorAll(".rightArrow"));
+        const leftBtn = products[index].querySelector(".leftArrow");
+        const rightBtn = products[index].querySelector(".rightArrow");
+        function next() {
+            navigation.forEach(btn => {
                 btn.classList.remove("show");
             });
+            if (i < slides.length - 1) {
+                i++;
+            }
+            else {
+                i = 0;
+            }
             slides.forEach((slide) => {
-                i = index;
-                slide.style.transform =  `translate(-${index*100}%)`;
+                slide.style.transform =  `translate(-${i*100}%)`;
             });
-            navigation[index].classList.add("show");
+            navigation[i].classList.add("show");
+        }
+        function prev() {
+            navigation.forEach(btn => {
+                btn.classList.remove("show");
+            });
+            if (i > 0) {
+                i--;
+            }
+            else {
+                i = slides.length - 1;
+            }
+            slides.forEach((slide) => {
+                slide.style.transform =  `translate(-${i*100}%)`;
+            });
+            navigation[i].classList.add("show");
+        }
+        leftBtn.addEventListener("click", () => {
+            prev();
             clearInterval(slideInterval);
             slideInterval = setInterval(next, interval);
         });
-    });
-    const images = slideShow.querySelectorAll("img");
-    images.forEach((image) => {
-        image.addEventListener("pointerover", () => {
+        rightBtn.addEventListener("click", () => {
+            next();
             clearInterval(slideInterval);
+            slideInterval = setInterval(next, interval);
         });
+        navigation.forEach((btn, index) => {
+            navigation[index].addEventListener("click", () => {
+                navigation.forEach((btn) => {
+                    btn.classList.remove("show");
+                });
+                slides.forEach((slide) => {
+                    i = index;
+                    slide.style.transform =  `translate(-${index*100}%)`;
+                });
+                navigation[index].classList.add("show");
+                clearInterval(slideInterval);
+                slideInterval = setInterval(next, interval);
+            });
+        });
+        const images = slideShow.querySelectorAll("img");
+        images.forEach((image) => {
+            image.addEventListener("pointerover", () => {
+                clearInterval(slideInterval);
+            });
 
-        image.addEventListener("pointerout", () => {
-            slideInterval = setInterval(next, interval);
+            image.addEventListener("pointerout", () => {
+                slideInterval = setInterval(next, interval);
+            });
         });
     });
-});
+}
+productSlide();
 // form validation
 function formValidation() {
     const formInputs = document.querySelectorAll(".form-input");
